@@ -1,7 +1,7 @@
 package enums;
 
 public enum TypeSinistre {
-    accidentDeVoiture,
-    accidentDeMaison,
-    maladie
+    ACCIDENT_VOITURE,
+    ACCIDENT_MAISON,
+    MALADIE
 }
