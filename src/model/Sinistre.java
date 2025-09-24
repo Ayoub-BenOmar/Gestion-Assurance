@@ -1,23 +1,26 @@
 package model;
 
 import enums.TypeSinistre;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Sinistre {
     private String id;
     private TypeSinistre typeSinistre;
-    private Date dateDebut;
-    private Date dateFin;
-    private int montant;
+    private Date dateTime;
+    private double cout;
     private String description;
+    private List<String> contrats;
 
-    public Sinistre(String id, TypeSinistre typeSinistre, Date dateDebut, Date dateFin, int montant, String description) {
+    public Sinistre(String id, TypeSinistre typeSinistre, Date dateTime, double cout, String description, List<String> contrats) {
         this.id = id;
         this.typeSinistre = typeSinistre;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.montant = montant;
+        this.dateTime = dateTime;
+        this.cout = cout;
         this.description = description;
+        this.contrats = new ArrayList<>();
     }
 
     public String getId() {
@@ -36,28 +39,20 @@ public class Sinistre {
         this.typeSinistre = typeSinistre;
     }
 
-    public Date getDateDebut() {
-        return dateDebut;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public Date getDateFin() {
-        return dateFin;
+    public double getCout() {
+        return cout;
     }
 
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
-    }
-
-    public int getMontant() {
-        return montant;
-    }
-
-    public void setMontant(int montant) {
-        this.montant = montant;
+    public void setCout(double cout) {
+        this.cout = cout;
     }
 
     public String getDescription() {
@@ -66,5 +61,13 @@ public class Sinistre {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<String> getContrats() {
+        return contrats;
+    }
+
+    public void setContrats(List<String> contrats) {
+        this.contrats = contrats;
     }
 }

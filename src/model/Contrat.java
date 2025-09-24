@@ -1,18 +1,17 @@
 package model;
 
 import enums.TypeContrat;
-
 import java.util.Date;
 import java.util.ArrayList;
 
-public class Contract {
+public class Contrat {
     private String id;
     private TypeContrat typeContrat;
     private Date dateDebut;
     private Date dateFin;
     private ArrayList<String> sinistres = new ArrayList<>();
 
-    public Contract(String id, TypeContrat typeContrat, Date dateDebut, Date dateFin, ArrayList<String> sinistres) {
+    public Contrat(String id, TypeContrat typeContrat, Date dateDebut, Date dateFin, ArrayList<String> sinistres) {
         this.id = id;
         this.typeContrat = typeContrat;
         this.dateDebut = dateDebut;

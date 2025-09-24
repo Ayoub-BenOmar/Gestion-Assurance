@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Gestion de contrats dassurance.iml" filepath="$PROJECT_DIR$/Gestion de contrats dassurance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GestionDeContratAssurance.iml" filepath="$PROJECT_DIR$/GestionDeContratAssurance.iml" />
     </modules>
   </component>
 </project>
