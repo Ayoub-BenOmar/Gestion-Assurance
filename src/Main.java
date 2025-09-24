@@ -9,6 +9,6 @@ public class Main {
         DatabaseConnection connection = new DatabaseConnection();
         connection.getConnection();
         ClientView clientView = new ClientView();
-        clientView.deleteUserButton();
+        clientView.searchConseillerById();
     }
 }

@@ -4,10 +4,8 @@ import connection.DatabaseConnection;
 import model.Client;
 import model.Conseiller;
 import model.Person;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 
 public class ClientDAO {
     Connection connection = DatabaseConnection.getConnection();
@@ -50,14 +48,35 @@ public class ClientDAO {
         }
     }
 
-    public void deleteUser(int id){
+    public int deleteUser(Integer id){
         String query = "DELETE FROM person WHERE id = ?";
         try(PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, id);
-            statement.executeUpdate();
-            System.out.println("User deleted successfully.");
+            return statement.executeUpdate();
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    public int searchConseillerById(Integer id){
+        String query = "SELECT nom, prenom FROM person WHERE id = ? AND role = 1";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                String nom = resultSet.getString("nom");
+                String prenom = resultSet.getString("prenom");
+                System.out.println("Conseiller found: " + nom + prenom );
+                return 1;
+            }else{
+                System.out.println("No conseiller found.");
+                return 0;
+            }
+        }catch(SQLException e){
+            System.out.println("Error: " + e.getMessage());
+            return 0;
         }
     }
 }

@@ -15,6 +15,7 @@ public class ClientService {
         try {
             if (role != 1 && role != 2){
                 System.out.println("Role should be: 1- Conseiller or 2- Client.");
+                return;
             }
 
             if (role == 2) {
@@ -33,13 +34,33 @@ public class ClientService {
         }
     }
 
-    public void deleteUser(int id){
+    public void deleteUser(Integer id){
         try{
-            if(id <= 0){
-                System.out.println("Enter a valid number");
+            if(id == null || id <= 0){
+                System.out.println("Enter a valid number.");
+                return;
             }
+            int rows = clientDAO.deleteUser(id);
+            if (rows > 0){
+                System.out.println("User deleted successfully");
+            }else{
+                System.out.println("No user found");
+            }
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
-            clientDAO.deleteUser(id);
+    public void searchConseillerById(Integer id){
+        try{
+            if(id == null || id <= 0){
+                System.out.println("Enter a valid number.");
+                return;
+            }
+            int rows = clientDAO.searchConseillerById(id);
+            if (rows <= 0){
+                System.out.println("No user found");
+            }
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
