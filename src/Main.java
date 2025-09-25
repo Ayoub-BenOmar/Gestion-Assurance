@@ -12,6 +12,6 @@ public class Main {
         ClientView clientView = new ClientView();
         ConseillerView conseillerView = new ConseillerView();
 //        clientView.addClientMenu();
-        conseillerView.deleteConseiller();
+        conseillerView.searchConseillerById();
     }
 }

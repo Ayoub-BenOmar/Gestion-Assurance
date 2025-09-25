@@ -42,19 +42,4 @@ public class ClientService {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-    public void searchConseillerById(Integer id){
-        try{
-            if(id == null || id <= 0){
-                System.out.println("Enter a valid number.");
-                return;
-            }
-            int rows = clientDAO.searchConseillerById(id);
-            if (rows <= 0){
-                System.out.println("No user found");
-            }
-        }catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
 }

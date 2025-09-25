@@ -35,4 +35,25 @@ public class ConseillerDAO {
             return 0;
         }
     }
+
+    public int searchConseillerById(Integer id){
+        String query = "SELECT nom, prenom FROM person WHERE id = ? AND role = 1";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                String nom = resultSet.getString("nom");
+                String prenom = resultSet.getString("prenom");
+                System.out.println("Conseiller found: " + nom + prenom );
+                return 1;
+            }else{
+                System.out.println("No conseiller found.");
+                return 0;
+            }
+        }catch(SQLException e){
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        }
+    }
 }

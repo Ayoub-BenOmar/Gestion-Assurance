@@ -34,4 +34,17 @@ public class ConseillerView {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public void searchConseillerById(){
+        System.out.println("Enter the conseiller id: ");
+        Integer id = scanner.nextInt();
+        scanner.nextLine();
+
+        try {
+            conseillerService.searchConseillerById(id);
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+
+    }
 }

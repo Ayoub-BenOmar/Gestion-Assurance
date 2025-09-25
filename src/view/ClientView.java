@@ -21,19 +21,6 @@ public class ClientView {
         }
     }
 
-    public void searchConseillerById(){
-        System.out.println("Enter the conseiller id: ");
-        Integer id = scanner.nextInt();
-        scanner.nextLine();
-
-        try {
-            clientService.searchConseillerById(id);
-        }catch(Exception e){
-            System.out.println("Error: " + e.getMessage());
-        }
-
-    }
-
     public void addClientMenu() {
         System.out.println("=== Add New Client ===");
         System.out.print("Nom: ");
