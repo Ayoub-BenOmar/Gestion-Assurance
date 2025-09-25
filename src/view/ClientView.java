@@ -1,8 +1,10 @@
 package view;
 
+import model.Client;
 import model.Person;
 import service.ClientService;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ClientView {
@@ -38,5 +40,24 @@ public class ClientView {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public void searchClient(){
+        System.out.println("Enter the client name: ");
+        String name = scanner.next();
+        scanner.nextLine();
+
+        List<Client> clients = clientService.searchClient(name);
+        try {
+            if (clients.isEmpty()){
+                System.out.println("No clients with this name foud.");
+                return;
+            } else{
+                clients.forEach(client -> System.out.println("Name: " + client.getName() +  ", " + "Prenom: " + client.getPrenom()));
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
     }
 }

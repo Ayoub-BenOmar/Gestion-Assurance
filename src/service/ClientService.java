@@ -4,6 +4,10 @@ import dao.ClientDAO;
 import model.Client;
 import model.Person;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ClientService {
     ClientDAO clientDAO =  new ClientDAO();
 
@@ -41,5 +45,14 @@ public class ClientService {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public List<Client> searchClient(String nom){
+        return clientDAO.searchClient().stream()
+                .filter(person -> person instanceof Client)
+                .map(person -> (Client) person)
+                .filter(client -> client.getName().equalsIgnoreCase(nom))
+                .sorted(Comparator.comparing(Client::getPrenom))
+                .collect(Collectors.toList());
     }
 }

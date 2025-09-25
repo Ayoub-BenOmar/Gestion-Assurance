@@ -11,6 +11,7 @@ public class Main {
         connection.getConnection();
         ClientView clientView = new ClientView();
         ConseillerView conseillerView = new ConseillerView();
+//        clientView.searchClient();
 //        clientView.addClientMenu();
         conseillerView.getClientsByConseillerId();
     }

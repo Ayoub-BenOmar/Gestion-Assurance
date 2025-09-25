@@ -64,7 +64,7 @@ public class ConseillerView {
                 clients.forEach(client -> System.out.println("name: " + client.getName()));
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error view: " + e.getMessage());
         }
     }
 }
