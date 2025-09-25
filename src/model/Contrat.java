@@ -5,26 +5,14 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class Contrat {
-    private String id;
     private TypeContrat typeContrat;
     private Date dateDebut;
     private Date dateFin;
-    private ArrayList<String> sinistres = new ArrayList<>();
 
-    public Contrat(String id, TypeContrat typeContrat, Date dateDebut, Date dateFin, ArrayList<String> sinistres) {
-        this.id = id;
+    public Contrat(TypeContrat typeContrat, Date dateDebut, Date dateFin) {
         this.typeContrat = typeContrat;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.sinistres = sinistres;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public TypeContrat getTypeContrat() {
@@ -49,13 +37,5 @@ public class Contrat {
 
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
-    }
-
-    public ArrayList<String> getSinistres() {
-        return sinistres;
-    }
-
-    public void setSinistres(ArrayList<String> sinistres) {
-        this.sinistres = sinistres;
     }
 }
