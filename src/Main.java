@@ -13,6 +13,8 @@ public class Main {
         ConseillerView conseillerView = new ConseillerView();
 //        clientView.searchClient();
 //        clientView.addClientMenu();
-        conseillerView.getClientsByConseillerId();
+//        conseillerView.getClientsByConseillerId();
+            clientView.searchClientById();
+
     }
 }

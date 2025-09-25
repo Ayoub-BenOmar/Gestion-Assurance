@@ -60,4 +60,16 @@ public class ClientView {
         }
 
     }
+
+    public void searchClientById(){
+        System.out.println("Enter the client id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            clientService.searchClientById(id);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }

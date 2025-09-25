@@ -8,6 +8,7 @@ import model.Person;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ClientDAO {
     Connection connection = DatabaseConnection.getConnection();
@@ -69,4 +70,26 @@ public class ClientDAO {
         }
         return persons;
     }
+
+    public Optional<Client> searchClientById(Integer id){
+        String query = "SELECT nom, prenom, email, conseiller_id FROM person WHERE id = ? AND role = 2";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            try(ResultSet resultSet = statement.executeQuery()){
+                if (resultSet.next()){
+                    Client client = new Client(
+                            resultSet.getString("nom"),
+                            resultSet.getString("prenom"),
+                            resultSet.getString("email"),
+                            resultSet.getInt("conseiller_id")
+                            );
+                    return Optional.of(client);
+                }
+            }
+        }catch(SQLException e){
+            System.out.println("Error DAO: " + e.getMessage());
+        }
+        return Optional.empty();
+    }
+
 }
