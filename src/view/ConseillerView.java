@@ -1,7 +1,10 @@
 package view;
 
+import model.Client;
+import model.Person;
 import service.ConseillerService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConseillerView {
@@ -46,5 +49,22 @@ public class ConseillerView {
             System.out.println("Error: " + e.getMessage());
         }
 
+    }
+
+    public void getClientsByConseillerId(){
+        System.out.println("Enter the conseiller id: ");
+        int id = scanner.nextInt();
+
+        List<Person> clients = conseillerService.getClientsByConseillerId(id);
+        try {
+            if(clients.isEmpty()){
+                System.out.println("No clients found for this conseiller id ");
+                return;
+            }else {
+                clients.forEach(client -> System.out.println("name: " + client.getName()));
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }

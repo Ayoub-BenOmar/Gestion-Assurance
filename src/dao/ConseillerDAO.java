@@ -1,10 +1,13 @@
 package dao;
 
 import connection.DatabaseConnection;
+import model.Client;
 import model.Person;
 import model.Conseiller;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConseillerDAO {
     Connection connection = DatabaseConnection.getConnection();
@@ -55,5 +58,35 @@ public class ConseillerDAO {
             System.out.println("Error: " + e.getMessage());
             return 0;
         }
+    }
+
+    public List<Person> getClientsByConseillerId(){
+        String query = "SELECT role, nom, prenom, email, conseiller_id FROM person";
+        List<Person> persons = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()){
+                    int role = resultSet.getInt("role");
+                    if (role == 1){
+                        Conseiller conseiller = new Conseiller(
+                                resultSet.getString("nom"),
+                                resultSet.getString("prenom"),
+                                resultSet.getString("email")
+                        );
+                        persons.add(conseiller);
+                    } else if (role == 2) {
+                        Client client = new Client(
+                                resultSet.getString("prenom"),
+                                resultSet.getString("prenom"),
+                                resultSet.getString("email"),
+                                resultSet.getInt("conseiller_id")
+                        );
+                        persons.add(client);
+                    }
+                }
+        }catch(SQLException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return persons;
     }
 }

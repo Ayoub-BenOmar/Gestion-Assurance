@@ -1,8 +1,12 @@
 package service;
 
 import dao.ConseillerDAO;
+import model.Client;
 import model.Conseiller;
 import model.Person;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConseillerService {
     ConseillerDAO conseillerDAO = new ConseillerDAO();
@@ -49,5 +53,13 @@ public class ConseillerService {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public List<Person> getClientsByConseillerId(Integer id){
+        return conseillerDAO.getClientsByConseillerId().stream()
+                .filter(person -> person instanceof Client)
+                .map(person -> (Client) person)
+                .filter(client -> client.getConseiller_id() == id)
+                .collect(Collectors.toList());
     }
 }
