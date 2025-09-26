@@ -1,13 +1,14 @@
 package service;
 
+import dao.ContratDAO;
 import dao.SinistreDAO;
 import enums.TypeContrat;
 import enums.TypeSinistre;
 import model.Contrat;
 import model.Sinistre;
+import java.util.stream.Collectors;
 
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 public class SinistreService {
     SinistreDAO sinistreDAO = new SinistreDAO();
@@ -82,5 +83,22 @@ public class SinistreService {
         }catch (Exception e) {
             System.out.println("Error service: " + e.getMessage());
         }
+    }
+
+    public List<Sinistre> getSinistresByClientId(Integer clientId) {
+        if (clientId == null || clientId <= 0) {
+            return Collections.emptyList();
+        }
+
+        List<Sinistre> sinistres = sinistreDAO.getSinistresByClientId();
+        ContratDAO contratDAO = new ContratDAO();
+
+        return sinistres.stream()
+                .filter(sinistre -> {
+                    Optional<Contrat> contratOpt = contratDAO.getContratById(sinistre.getContratId());
+                    return contratOpt.map(contrat -> Objects.equals(contrat.getClient_id(), clientId))
+                            .orElse(false);
+                })
+                .collect(Collectors.toList());
     }
 }

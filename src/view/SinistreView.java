@@ -1,11 +1,13 @@
 package view;
 
 import enums.TypeSinistre;
+import model.Sinistre;
 import service.SinistreService;
 
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Scanner;
 
 public class SinistreView {
@@ -74,5 +76,27 @@ public class SinistreView {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public void getSinistresByClientId() {
+        System.out.print("Enter client ID: ");
+        Integer clientId = null;
+        try {
+            clientId = Integer.valueOf(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number.");
+            return;
+        }
+
+        List<Sinistre> sinistres = sinistreService.getSinistresByClientId(clientId);
+
+        if (sinistres.isEmpty()) {
+            System.out.println("No sinistres found for this client ");
+            return;
+        }
+
+        System.out.println("Sinistres for client " + clientId + " found:");
+        sinistres.forEach(sinistre -> { System.out.println("ID: " + sinistre.getId() + ", Type: " + sinistre.getTypeSinistre() + ", Date: " + sinistre.getDateTime() + ", Cout: " + sinistre.getCout() + ", Desc: " + sinistre.getDescription() + ", ContratId: " + sinistre.getContratId());
+        });
     }
 }

@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class SinistreDAO {
@@ -62,5 +64,26 @@ public class SinistreDAO {
             System.out.println("Error DAO: " + e.getMessage());
         }
         return Optional.empty();
+    }
+
+    public List<Sinistre> getSinistresByClientId() {
+        List<Sinistre> sinistres = new ArrayList<>();
+        String query = "SELECT id, type_sinistre, date_time, cout, description, contrat_id FROM sinistre";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet resultSet = stmt.executeQuery()) {
+            while (resultSet.next()) {
+                Sinistre sinistre = new Sinistre(
+                        TypeSinistre.valueOf(resultSet.getString("type_sinistre")),
+                        resultSet.getDate("date_time"),
+                        resultSet.getDouble("cout"),
+                        resultSet.getString("description"),
+                        resultSet.getInt("contrat_id")
+                );
+                sinistres.add(sinistre);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error DAO: " + e.getMessage());
+        }
+        return sinistres;
     }
 }
