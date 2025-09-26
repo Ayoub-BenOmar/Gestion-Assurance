@@ -59,4 +59,15 @@ public class ContratDAO {
         return Optional.empty();
     }
 
+    public int deleteContrat(Integer id){
+        String query = "DELETE FROM contrat WHERE id = ?";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            return statement.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Error DAO: " + e.getMessage());
+            return 0;
+        }
+    }
+
 }

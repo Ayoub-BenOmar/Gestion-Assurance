@@ -45,4 +45,16 @@ public class ContratView {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public void deleteContrat(){
+        System.out.println("Enter the contrat id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            contratService.deleteContrat(id);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class Main {
         ClientView clientView = new ClientView();
         ConseillerView conseillerView = new ConseillerView();
         ContratView contratView = new ContratView();
-        contratView.getContratById();
+        contratView.deleteContrat();
 //        clientView.searchClient();
 //        clientView.addClientMenu();
 //        conseillerView.getClientsByConseillerId();

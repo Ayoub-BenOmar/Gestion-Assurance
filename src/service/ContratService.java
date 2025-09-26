@@ -46,4 +46,22 @@ public class ContratService {
             System.out.println("Error service: " + e.getMessage());
         }
     }
+
+    public void deleteContrat(Integer id){
+        try{
+            if (id == null || id <= 0){
+                System.out.println("Error: Enter a valid id number");
+                return;
+            }
+            int rows = contratDAO.deleteContrat(id);
+            if (rows > 0){
+                System.out.println("Contrat deleted successfully");
+                return;
+            }else{
+                System.out.println("No contrat found with this id");
+            }
+        }catch (Exception e){
+            System.out.println("Error service: " + e.getMessage());
+        }
+    }
 }
