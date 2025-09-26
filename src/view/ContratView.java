@@ -57,4 +57,16 @@ public class ContratView {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public void getContractsByClientId(){
+        System.out.println("Enter the client id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            contratService.getContractsByClientId(id);
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+    }
 }

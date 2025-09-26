@@ -5,6 +5,8 @@ import enums.TypeContrat;
 import model.Contrat;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ContratDAO {
@@ -68,6 +70,29 @@ public class ContratDAO {
             System.out.println("Error DAO: " + e.getMessage());
             return 0;
         }
+    }
+
+    public List<Contrat> getContractsByClientId(Integer id){
+        String query = "SELECT id, type_contrat, date_debut, date_fin, client_id FROM contrat WHERE client_id = ?";
+        List<Contrat> contrats = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            try(ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()) {
+                    Contrat contrat = new Contrat(
+                            resultSet.getInt("id"),
+                            TypeContrat.valueOf(resultSet.getString("type_contrat")),
+                            resultSet.getDate("date_debut").toLocalDate(),
+                            resultSet.getDate("date_fin").toLocalDate(),
+                            resultSet.getInt("client_id")
+                    );
+                    contrats.add(contrat);
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return contrats;
     }
 
 }

@@ -10,10 +10,10 @@ public class Main {
     public static void main(String[] args) {
         DatabaseConnection connection = new DatabaseConnection();
         connection.getConnection();
-        ClientView clientView = new ClientView();
-        ConseillerView conseillerView = new ConseillerView();
+//        ClientView clientView = new ClientView();
+//        ConseillerView conseillerView = new ConseillerView();
         ContratView contratView = new ContratView();
-        contratView.deleteContrat();
+        contratView.getContractsByClientId();
 //        clientView.searchClient();
 //        clientView.addClientMenu();
 //        conseillerView.getClientsByConseillerId();

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Contrat {
+    private Integer id;
     private TypeContrat typeContrat;
     private LocalDate dateDebut;
     private LocalDate dateFin;
@@ -16,6 +17,22 @@ public class Contrat {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.client_id = client_id;
+    }
+
+    public Contrat(Integer id, TypeContrat typeContrat, LocalDate dateDebut, LocalDate dateFin, Integer client_id) {
+        this.id = id;
+        this.typeContrat = typeContrat;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.client_id = client_id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getClient_id() {

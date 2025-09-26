@@ -5,6 +5,7 @@ import enums.TypeContrat;
 import model.Contrat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public class ContratService {
@@ -61,6 +62,24 @@ public class ContratService {
                 System.out.println("No contrat found with this id");
             }
         }catch (Exception e){
+            System.out.println("Error service: " + e.getMessage());
+        }
+    }
+
+    public void getContractsByClientId(Integer id){
+
+        try {
+            if (id == null || id <= 0){
+                System.out.println("Error: Enter a valid id number");
+                return;
+            }
+            List<Contrat> contrats = contratDAO.getContractsByClientId(id);
+            if (contrats.isEmpty()) {
+                System.out.println("No contracts found for this client id ");
+                return;
+            }
+            contrats.forEach(contrat -> System.out.println("ID: " + contrat.getId() + ", Type of contrat: " + contrat.getTypeContrat() + ", Start: " + contrat.getDateDebut() + ", End: " + contrat.getDateFin()));
+        } catch (Exception e) {
             System.out.println("Error service: " + e.getMessage());
         }
     }
