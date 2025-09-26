@@ -5,6 +5,7 @@ import enums.TypeContrat;
 import model.Contrat;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class ContratService {
     ContratDAO contratDAO = new ContratDAO();
@@ -27,6 +28,20 @@ public class ContratService {
             }
             Contrat contrat = new Contrat(typeContrat, date_debut, date_fin, client_id);
             contratDAO.addContrat(contrat);
+        }catch (Exception e) {
+            System.out.println("Error service: " + e.getMessage());
+        }
+    }
+
+    public void getClientById(Integer id){
+        Optional<Contrat> contratOptional = contratDAO.getContratById(id);
+        try{
+            if(contratOptional.isPresent()){
+                Contrat contrat = contratOptional.get();
+                System.out.println("Contrat found: " + contrat.getTypeContrat() + ", " + contrat.getDateDebut() + ", " + contrat.getDateFin() + ", " + contrat.getClient_id());
+            }else{
+                System.out.println("No contrat found with this ID.");
+            }
         }catch (Exception e) {
             System.out.println("Error service: " + e.getMessage());
         }

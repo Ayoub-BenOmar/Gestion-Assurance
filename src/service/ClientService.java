@@ -69,6 +69,5 @@ public class ClientService {
         } catch (Exception e) {
             System.out.println("Error service: " + e.getMessage());
         }
-
     }
 }
