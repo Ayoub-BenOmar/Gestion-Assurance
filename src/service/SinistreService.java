@@ -85,8 +85,8 @@ public class SinistreService {
         }
     }
 
-    public List<Sinistre> getSinistresByClientId(Integer clientId) {
-        if (clientId == null || clientId <= 0) {
+    public List<Sinistre> getSinistresByClientId(Integer id) {
+        if (id == null || id <= 0) {
             return Collections.emptyList();
         }
 
@@ -96,9 +96,20 @@ public class SinistreService {
         return sinistres.stream()
                 .filter(sinistre -> {
                     Optional<Contrat> contratOpt = contratDAO.getContratById(sinistre.getContratId());
-                    return contratOpt.map(contrat -> Objects.equals(contrat.getClient_id(), clientId))
+                    return contratOpt.map(contrat -> Objects.equals(contrat.getClient_id(), id))
                             .orElse(false);
                 })
+                .collect(Collectors.toList());
+    }
+
+    public List<Sinistre> getSinistresByContratId(Integer id) {
+        if (id == null || id <= 0) {
+            System.out.println("Enter a valid contrat id");
+            return Collections.emptyList();
+        }
+
+        return sinistreDAO.getSinistresByContratId().stream()
+                .filter(sinistre -> Objects.equals(sinistre.getContratId(), id))
                 .collect(Collectors.toList());
     }
 }

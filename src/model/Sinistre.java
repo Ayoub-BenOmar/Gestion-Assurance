@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Sinistre {
-    private String id;
+    private Integer id;
     private TypeSinistre typeSinistre;
     private Date dateTime;
     private double cout;
@@ -22,7 +22,7 @@ public class Sinistre {
         this.contratId = contratId;
     }
 
-    public Sinistre(String id, TypeSinistre typeSinistre, Date dateTime, double cout, String description, Integer contratId) {
+    public Sinistre(Integer id, TypeSinistre typeSinistre, Date dateTime, double cout, String description, Integer contratId) {
         this.id = id;
         this.typeSinistre = typeSinistre;
         this.dateTime = dateTime;
@@ -39,11 +39,11 @@ public class Sinistre {
         this.contratId = contratId;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

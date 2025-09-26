@@ -80,23 +80,37 @@ public class SinistreView {
 
     public void getSinistresByClientId() {
         System.out.print("Enter client ID: ");
-        Integer clientId = null;
+        Integer id = null;
         try {
-            clientId = Integer.valueOf(scanner.nextLine());
+            id = Integer.valueOf(scanner.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Invalid number.");
             return;
         }
 
-        List<Sinistre> sinistres = sinistreService.getSinistresByClientId(clientId);
+        List<Sinistre> sinistres = sinistreService.getSinistresByClientId(id);
 
         if (sinistres.isEmpty()) {
             System.out.println("No sinistres found for this client ");
             return;
         }
 
-        System.out.println("Sinistres for client " + clientId + " found:");
+        System.out.println("Sinistres for client " + id + " found:");
         sinistres.forEach(sinistre -> { System.out.println("ID: " + sinistre.getId() + ", Type: " + sinistre.getTypeSinistre() + ", Date: " + sinistre.getDateTime() + ", Cout: " + sinistre.getCout() + ", Desc: " + sinistre.getDescription() + ", ContratId: " + sinistre.getContratId());
         });
+    }
+
+    public void getSinistresByContratId() {
+        System.out.print("Enter contrat ID: ");
+        Integer id = scanner.nextInt();
+        scanner.nextLine();
+
+        List<Sinistre> sinistres = sinistreService.getSinistresByContratId(id);
+
+        if (sinistres.isEmpty()) {
+            System.out.println("No sinistres found for this contrat");
+        } else {
+            sinistres.forEach(sinistre -> System.out.println("ID: " + sinistre.getId() + ", Type: " + sinistre.getTypeSinistre() + ", Date: " + sinistre.getDateTime() + ", Cout: " + sinistre.getCout() + ", Desc: " + sinistre.getDescription()));
+        }
     }
 }

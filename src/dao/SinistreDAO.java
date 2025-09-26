@@ -73,6 +73,7 @@ public class SinistreDAO {
              ResultSet resultSet = stmt.executeQuery()) {
             while (resultSet.next()) {
                 Sinistre sinistre = new Sinistre(
+                        resultSet.getInt("id"),
                         TypeSinistre.valueOf(resultSet.getString("type_sinistre")),
                         resultSet.getDate("date_time"),
                         resultSet.getDouble("cout"),
@@ -86,4 +87,27 @@ public class SinistreDAO {
         }
         return sinistres;
     }
+
+    public List<Sinistre> getSinistresByContratId() {
+        List<Sinistre> sinistres = new ArrayList<>();
+        String query = "SELECT id, type_sinistre, date_time, cout, description, contrat_id FROM sinistre";
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Sinistre sinistre = new Sinistre(
+                        resultSet.getInt("id"),
+                        TypeSinistre.valueOf(resultSet.getString("type_sinistre")),
+                        resultSet.getDate("date_time"),
+                        resultSet.getDouble("cout"),
+                        resultSet.getString("description"),
+                        resultSet.getInt("contrat_id")
+                );
+                sinistres.add(sinistre);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error DAO: " + e.getMessage());
+        }
+        return sinistres;
+    }
+
 }
