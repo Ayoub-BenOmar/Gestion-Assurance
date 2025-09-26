@@ -128,4 +128,15 @@ public class SinistreService {
                 .collect(Collectors.toList());
     }
 
+    public List<Sinistre> getSinistresByCoutMoreThan(double montant) {
+        if (montant <= 0) {
+            System.out.println("Error: montant should be positive.");
+            return Collections.emptyList();
+        }
+        return sinistreDAO.getAllSinistres().stream()
+                .filter(sinistre -> sinistre.getCout() > montant)
+                .collect(Collectors.toList());
+    }
+
+
 }

@@ -127,10 +127,10 @@ public class SinistreView {
 
     public void getSinistresBeforeDate() {
         System.out.print("Enter a date (YYYY-MM-DD): ");
-        String dateStr = scanner.nextLine();
+        String dateInput = scanner.nextLine();
         LocalDate date;
         try {
-            date = LocalDate.parse(dateStr);
+            date = LocalDate.parse(dateInput);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid date format.");
             return;
@@ -140,7 +140,20 @@ public class SinistreView {
             System.out.println("No sinistres found before this date.");
         } else {
             System.out.println("Sinistres before this date:");
-            sinistres.forEach(s -> System.out.println("ID: " + s.getId() + ", Type: " + s.getTypeSinistre() + ", Date: " + s.getDateTime() + ", Cout: " + s.getCout() + ", Desc: " + s.getDescription()));
+            sinistres.forEach(sinistre -> System.out.println("ID: " + sinistre.getId() + ", Type: " + sinistre.getTypeSinistre() + ", Date: " + sinistre.getDateTime() + ", Cout: " + sinistre.getCout() + ", Desc: " + sinistre.getDescription()));
+        }
+    }
+
+    public void getSinistresByCoutMoreThan() {
+        System.out.print("Enter montant: ");
+        double montant = scanner.nextDouble();
+        scanner.nextLine();
+        List<Sinistre> sinistres = sinistreService.getSinistresByCoutMoreThan(montant);
+        if (sinistres.isEmpty()) {
+            System.out.println("No sinistres found with cout more than this amount");
+        } else {
+            System.out.println("Sinistres with cout more than this amount: ");
+            sinistres.forEach(sinistre -> System.out.println("ID: " + sinistre.getId() +", Type: " + sinistre.getTypeSinistre() +", Date: " + sinistre.getDateTime() + ", Cout: " + sinistre.getCout() + ", Desc: " + sinistre.getDescription()));
         }
     }
 
