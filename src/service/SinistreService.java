@@ -7,6 +7,7 @@ import model.Contrat;
 import model.Sinistre;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class SinistreService {
     SinistreDAO sinistreDAO = new SinistreDAO();
@@ -65,6 +66,20 @@ public class SinistreService {
                 System.out.println("No sinistre found with this id");
             }
         }catch (Exception e){
+            System.out.println("Error service: " + e.getMessage());
+        }
+    }
+
+    public void getSinistreById(Integer id){
+        Optional<Sinistre> sinistreOptional = sinistreDAO.getSinistreById(id);
+        try{
+            if(sinistreOptional.isPresent()){
+                Sinistre sinistre = sinistreOptional.get();
+                System.out.println("Sinistre found: " + sinistre.getTypeSinistre() + ", " + sinistre.getDateTime() + ", " + sinistre.getCout() + ", " + sinistre.getDescription() + ", " + sinistre.getContratId());
+            }else{
+                System.out.println("No sinistre found with this ID.");
+            }
+        }catch (Exception e) {
             System.out.println("Error service: " + e.getMessage());
         }
     }

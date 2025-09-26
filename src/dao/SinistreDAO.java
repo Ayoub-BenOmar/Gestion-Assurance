@@ -1,11 +1,16 @@
 package dao;
 
 import connection.DatabaseConnection;
+import enums.TypeContrat;
+import enums.TypeSinistre;
+import model.Contrat;
 import model.Sinistre;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class SinistreDAO {
     Connection connection = DatabaseConnection.getConnection();
@@ -35,5 +40,27 @@ public class SinistreDAO {
             System.out.println("Error DAO: " + e.getMessage());
             return 0;
         }
+    }
+
+    public Optional<Sinistre> getSinistreById(Integer id){
+        String query = "SELECT id, type_sinistre, date_time, cout, description, contrat_id FROM sinistre WHERE id = ?";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next()){
+                    Sinistre sinistre = new Sinistre(
+                            TypeSinistre.valueOf(resultSet.getString("type_sinistre")),
+                            resultSet.getDate("date_time"),
+                            resultSet.getDouble("cout"),
+                            resultSet.getString("description"),
+                            resultSet.getInt("contrat_id")
+                    );
+                    return Optional.of(sinistre);
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Error DAO: " + e.getMessage());
+        }
+        return Optional.empty();
     }
 }

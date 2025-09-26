@@ -63,4 +63,16 @@ public class SinistreView {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public void getSinistreById(){
+        System.out.println("Enter the sinistre id: ");
+        Integer id = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            sinistreService.getSinistreById(id);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }
