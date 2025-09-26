@@ -1,15 +1,48 @@
 package view;
 
-import model.Client;
 import model.Person;
 import service.ConseillerService;
-
 import java.util.List;
 import java.util.Scanner;
 
 public class ConseillerView {
     ConseillerService conseillerService = new ConseillerService();
     Scanner scanner = new Scanner(System.in);
+
+    public void menuConseiller() {
+        int choice = -1;
+        do {
+            System.out.println("\n=== Gérer les Conseillers ===");
+            System.out.println("1. Ajouter un conseiller");
+            System.out.println("2. Supprimer un conseiller par ID");
+            System.out.println("3. Rechercher un conseiller par ID");
+            System.out.println("4. Afficher les clients d'un conseiller par ID");
+            System.out.println("0. Retour au menu principal");
+            System.out.print("Entrez votre choix: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    addConseillerMenu();
+                    break;
+                case 2:
+                    deleteConseiller();
+                    break;
+                case 3:
+                    searchConseillerById();
+                    break;
+                case 4:
+                    getClientsByConseillerId();
+                    break;
+                case 0:
+                    System.out.println("Retour au menu principal");
+                    break;
+                default : System.out.println("Choix invalide !");
+                    break;
+            }
+        } while (choice != 0);
+    }
 
     public void addConseillerMenu(){
         System.out.println("=== Add New Conseiller ===");

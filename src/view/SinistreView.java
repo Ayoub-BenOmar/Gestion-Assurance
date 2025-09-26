@@ -4,8 +4,6 @@ import enums.TypeSinistre;
 import model.Sinistre;
 import service.SinistreService;
 
-import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -16,6 +14,62 @@ public class SinistreView {
     private SinistreService sinistreService = new SinistreService();
     private Scanner scanner = new Scanner(System.in);
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    public void menuSinistre() {
+        int choice = -1;
+        do {
+            System.out.println("\n=== Gérer les Sinistres ===");
+            System.out.println("1. Ajouter un sinistre");
+            System.out.println("2. Supprimer un sinistre par ID");
+            System.out.println("3. Calcul total des couts des sinistres d’un client");
+            System.out.println("4. Rechercher un sinistre par ID");
+            System.out.println("5. Afficher les sinistres d’un contrat par ID");
+            System.out.println("6. Afficher les sinistres triés par montant décroissant");
+            System.out.println("7. Afficher les sinistres par client ID");
+            System.out.println("8. Afficher les sinistres avant une date donnée");
+            System.out.println("9. Afficher les sinistres dont le cout est supérieur à un montant donné");
+            System.out.println("0. Retour au menu principal");
+            System.out.print("Entrez votre choix: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    addSinistre();
+                    break;
+                case 2:
+                    deleteSinistre();
+                    break;
+                case 3:
+                    getTotalCoutByClientId();
+                    break;
+                case 4:
+                    getSinistreById();
+                    break;
+                case 5:
+                    getSinistresByContratId();
+                    break;
+                case 6:
+                    getSinistresByCoutDesc();
+                    break;
+                case 7:
+                    getSinistresByClientId();
+                    break;
+                case 8:
+                    getSinistresBeforeDate();
+                    break;
+                case 9:
+                    getSinistresByCoutMoreThan();
+                    break;
+                case 0:
+                    System.out.println("Retour au menu principal");
+                    break;
+                default:
+                    System.out.println("Choix invalide !");
+                    break;
+            }
+        } while (choice != 0);
+    }
 
     public void addSinistre(){
         try {
@@ -165,6 +219,4 @@ public class SinistreView {
         double totalCout = sinistreService.getTotalCoutByClientId(id);
         System.out.println("Total cost of all sinistres for this client is: " + totalCout);
     }
-
-
 }

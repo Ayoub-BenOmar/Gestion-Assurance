@@ -6,12 +6,47 @@ import service.ContratService;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ContratView {
     ContratService contratService = new ContratService();
     Scanner scanner = new Scanner(System.in);
+
+    public void menuContrat() {
+        int choice = -1;
+        do {
+            System.out.println("\n=== Gérer les Contrats ===");
+            System.out.println("1. Ajouter un contrat");
+            System.out.println("2. Affichage des informations d’un contrat par ID");
+            System.out.println("3. Supprimer un contrat par ID");
+            System.out.println("4. Afficher les contrats d’un client par ID");
+            System.out.println("0. Retour au menu principal");
+            System.out.print("Entrez votre choix: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    addContrat();
+                    break;
+                case 2:
+                    getContratById();
+                    break;
+                case 3:
+                    deleteContrat();
+                    break;
+                case 4:
+                    getContractsByClientId();
+                    break;
+                case 0:
+                    System.out.println("Retour au menu principal");
+                    break;
+                default:
+                    System.out.println("Choix invalide !");
+                    break;
+            }
+        } while (choice != 0);
+    }
 
     public void addContrat(){
         System.out.println("Enter contrat type (AUTOMOBILE, MAISON, MALADIE): ");
@@ -72,6 +107,4 @@ public class ContratView {
             System.out.println("Error: " +e.getMessage());
         }
     }
-
-
 }
