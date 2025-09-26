@@ -50,4 +50,22 @@ public class SinistreService {
             System.out.println("Eroor service: " + e.getMessage());
         }
     }
+
+    public void deleteSinistre(Integer id){
+        try{
+            if (id == null || id <= 0){
+                System.out.println("Error: Enter a valid id number");
+                return;
+            }
+            int rows = sinistreDAO.deleteSinistre(id);
+            if (rows > 0){
+                System.out.println("Sinistre deleted successfully");
+                return;
+            }else{
+                System.out.println("No sinistre found with this id");
+            }
+        }catch (Exception e){
+            System.out.println("Error service: " + e.getMessage());
+        }
+    }
 }

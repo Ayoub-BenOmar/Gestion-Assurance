@@ -52,5 +52,15 @@ public class SinistreView {
         }
     }
 
+    public void deleteSinistre(){
+        System.out.println("Enter the sinistre id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
 
+        try{
+            sinistreService.deleteSinistre(id);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }

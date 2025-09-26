@@ -25,4 +25,15 @@ public class SinistreDAO {
             System.out.println("Error DAO: " + e.getMessage());
         }
     }
+
+    public int deleteSinistre(Integer id){
+        String query = "DELETE FROM sinistre WHERE id = ?";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            return statement.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Error DAO: " + e.getMessage());
+            return 0;
+        }
+    }
 }
