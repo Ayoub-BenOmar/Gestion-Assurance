@@ -113,4 +113,14 @@ public class SinistreView {
             sinistres.forEach(sinistre -> System.out.println("ID: " + sinistre.getId() + ", Type: " + sinistre.getTypeSinistre() + ", Date: " + sinistre.getDateTime() + ", Cout: " + sinistre.getCout() + ", Desc: " + sinistre.getDescription()));
         }
     }
+
+    public void getSinistresByCoutDesc() {
+        List<Sinistre> sinistres = sinistreService.getSinistresByCoutDesc();
+        if (sinistres.isEmpty()) {
+            System.out.println("No sinistres found.");
+        } else {
+            System.out.println("Sinistres sorted by amount (descending):");
+            sinistres.forEach(s -> System.out.println("ID: " + s.getId() + ", Type: " + s.getTypeSinistre() + ", Date: " + s.getDateTime() + ", Cout: " + s.getCout() + ", Desc: " + s.getDescription()));
+        }
+    }
 }

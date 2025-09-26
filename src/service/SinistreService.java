@@ -90,7 +90,7 @@ public class SinistreService {
             return Collections.emptyList();
         }
 
-        List<Sinistre> sinistres = sinistreDAO.getSinistresByClientId();
+        List<Sinistre> sinistres = sinistreDAO.getAllSinistres();
         ContratDAO contratDAO = new ContratDAO();
 
         return sinistres.stream()
@@ -107,9 +107,14 @@ public class SinistreService {
             System.out.println("Enter a valid contrat id");
             return Collections.emptyList();
         }
-
-        return sinistreDAO.getSinistresByContratId().stream()
+        return sinistreDAO.getAllSinistres().stream()
                 .filter(sinistre -> Objects.equals(sinistre.getContratId(), id))
+                .collect(Collectors.toList());
+    }
+
+    public List<Sinistre> getSinistresByCoutDesc() {
+        return sinistreDAO.getAllSinistres().stream()
+                .sorted((sinistre1, sinistre2) -> Double.compare(sinistre2.getCout(), sinistre1.getCout()))
                 .collect(Collectors.toList());
     }
 }
