@@ -7,6 +7,8 @@ import service.SinistreService;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,11 +31,10 @@ public class SinistreView {
 
             System.out.println("Enter date of sinistre (YYYY-MM-DD): ");
             String dateTime = scanner.nextLine();
-            Date date_time;
+            LocalDate date_time;
             try {
-                java.util.Date utilDate = dateFormat.parse(dateTime);
-                date_time = new Date(utilDate.getTime());
-            } catch (ParseException e) {
+                date_time = LocalDate.parse(dateTime);
+            } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format");
                 return;
             }
@@ -123,4 +124,24 @@ public class SinistreView {
             sinistres.forEach(s -> System.out.println("ID: " + s.getId() + ", Type: " + s.getTypeSinistre() + ", Date: " + s.getDateTime() + ", Cout: " + s.getCout() + ", Desc: " + s.getDescription()));
         }
     }
+
+    public void getSinistresBeforeDate() {
+        System.out.print("Enter a date (YYYY-MM-DD): ");
+        String dateStr = scanner.nextLine();
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format.");
+            return;
+        }
+        List<Sinistre> sinistres = sinistreService.getSinistresBeforeDate(date);
+        if (sinistres.isEmpty()) {
+            System.out.println("No sinistres found before this date.");
+        } else {
+            System.out.println("Sinistres before this date:");
+            sinistres.forEach(s -> System.out.println("ID: " + s.getId() + ", Type: " + s.getTypeSinistre() + ", Date: " + s.getDateTime() + ", Cout: " + s.getCout() + ", Desc: " + s.getDescription()));
+        }
+    }
+
 }

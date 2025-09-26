@@ -6,6 +6,8 @@ import enums.TypeContrat;
 import enums.TypeSinistre;
 import model.Contrat;
 import model.Sinistre;
+
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 import java.util.*;
@@ -13,7 +15,7 @@ import java.util.*;
 public class SinistreService {
     SinistreDAO sinistreDAO = new SinistreDAO();
 
-    public void addSinistre(TypeSinistre typeSinistre, Date dateTime, double cout, String description, Integer contratId){
+    public void addSinistre(TypeSinistre typeSinistre, LocalDate dateTime, double cout, String description, Integer contratId){
         try{
             if (typeSinistre == null) {
                 System.out.println("Error: Sinistre type must be specified");
@@ -25,11 +27,11 @@ public class SinistreService {
                 return;
             }
 
-            java.sql.Date today = new java.sql.Date(System.currentTimeMillis());
-            if (dateTime.after(today)) {
-                System.out.println("Error: Date cannot be in the future.");
-                return;
-            }
+//            java.sql.Date today = new java.sql.Date(System.currentTimeMillis());
+//            if (dateTime.after(today)) {
+//                System.out.println("Error: Date cannot be in the future.");
+//                return;
+//            }
 
             if (cout <= 0) {
                 System.out.println("Error: Cost must be greater than zero");
@@ -89,10 +91,8 @@ public class SinistreService {
         if (id == null || id <= 0) {
             return Collections.emptyList();
         }
-
         List<Sinistre> sinistres = sinistreDAO.getAllSinistres();
         ContratDAO contratDAO = new ContratDAO();
-
         return sinistres.stream()
                 .filter(sinistre -> {
                     Optional<Contrat> contratOpt = contratDAO.getContratById(sinistre.getContratId());
@@ -117,4 +117,15 @@ public class SinistreService {
                 .sorted((sinistre1, sinistre2) -> Double.compare(sinistre2.getCout(), sinistre1.getCout()))
                 .collect(Collectors.toList());
     }
+
+    public List<Sinistre> getSinistresBeforeDate(LocalDate date) {
+        if (date == null) {
+            System.out.println("Enter a valid date");
+            return Collections.emptyList();
+        }
+        return sinistreDAO.getAllSinistres().stream()
+                .filter(sinistre -> sinistre.getDateTime().isBefore(date))
+                .collect(Collectors.toList());
+    }
+
 }

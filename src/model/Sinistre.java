@@ -2,6 +2,7 @@ package model;
 
 import enums.TypeSinistre;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,12 +10,12 @@ import java.util.List;
 public class Sinistre {
     private Integer id;
     private TypeSinistre typeSinistre;
-    private Date dateTime;
+    private LocalDate dateTime;
     private double cout;
     private String description;
     private Integer contratId;
 
-    public Sinistre(TypeSinistre typeSinistre, Date dateTime, double cout, String description, Integer contratId) {
+    public Sinistre(TypeSinistre typeSinistre, LocalDate dateTime, double cout, String description, Integer contratId) {
         this.typeSinistre = typeSinistre;
         this.dateTime = dateTime;
         this.cout = cout;
@@ -22,7 +23,7 @@ public class Sinistre {
         this.contratId = contratId;
     }
 
-    public Sinistre(Integer id, TypeSinistre typeSinistre, Date dateTime, double cout, String description, Integer contratId) {
+    public Sinistre(Integer id, TypeSinistre typeSinistre, LocalDate dateTime, double cout, String description, Integer contratId) {
         this.id = id;
         this.typeSinistre = typeSinistre;
         this.dateTime = dateTime;
@@ -55,11 +56,11 @@ public class Sinistre {
         this.typeSinistre = typeSinistre;
     }
 
-    public Date getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
 

@@ -6,10 +6,7 @@ import enums.TypeSinistre;
 import model.Contrat;
 import model.Sinistre;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +18,7 @@ public class SinistreDAO {
         String query = "INSERT INTO sinistre (type_sinistre, date_time, cout, description, contrat_id) VALUES (?, ?, ?, ?, ?)";
         try(PreparedStatement statement = connection.prepareStatement(query)){
             statement.setString(1, sinistre.getTypeSinistre().name());
-            statement.setDate(2, new java.sql.Date(sinistre.getDateTime().getTime()));
+            statement.setDate(2, Date.valueOf(sinistre.getDateTime()));
             statement.setDouble(3, sinistre.getCout());
             statement.setString(4, sinistre.getDescription());
             statement.setInt(5, sinistre.getContratId());
@@ -52,7 +49,7 @@ public class SinistreDAO {
                 if(resultSet.next()){
                     Sinistre sinistre = new Sinistre(
                             TypeSinistre.valueOf(resultSet.getString("type_sinistre")),
-                            resultSet.getDate("date_time"),
+                            resultSet.getDate("date_time").toLocalDate(),
                             resultSet.getDouble("cout"),
                             resultSet.getString("description"),
                             resultSet.getInt("contrat_id")
@@ -75,7 +72,7 @@ public class SinistreDAO {
                 Sinistre sinistre = new Sinistre(
                         resultSet.getInt("id"),
                         TypeSinistre.valueOf(resultSet.getString("type_sinistre")),
-                        resultSet.getDate("date_time"),
+                        resultSet.getDate("date_time").toLocalDate(),
                         resultSet.getDouble("cout"),
                         resultSet.getString("description"),
                         resultSet.getInt("contrat_id")
