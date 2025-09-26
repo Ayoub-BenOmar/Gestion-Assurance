@@ -22,7 +22,7 @@ public class Main {
 //        clientView.addClientMenu();
 //        conseillerView.getClientsByConseillerId();
 //        clientView.searchClientById();
-        sinistreView.getSinistresByCoutMoreThan();
+        sinistreView.getTotalCoutByClientId();
 
     }
 }

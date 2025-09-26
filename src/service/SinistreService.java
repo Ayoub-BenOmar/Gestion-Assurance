@@ -130,7 +130,7 @@ public class SinistreService {
 
     public List<Sinistre> getSinistresByCoutMoreThan(double montant) {
         if (montant <= 0) {
-            System.out.println("Error: montant should be positive.");
+            System.out.println("Montant should be positive.");
             return Collections.emptyList();
         }
         return sinistreDAO.getAllSinistres().stream()
@@ -138,5 +138,21 @@ public class SinistreService {
                 .collect(Collectors.toList());
     }
 
+    public double getTotalCoutByClientId(Integer id) {
+        if (id == null || id <= 0) {
+            System.out.println("Enter a valid client ID");
+            return 0;
+        }
+        ContratService contratService = new ContratService();
+        List<Contrat> contrats = contratService.getContractsByClientId(id);
+        List<Sinistre> sinistres = sinistreDAO.getAllSinistres().stream()
+                .filter(sinistre -> contrats.stream()
+                        .anyMatch(c -> c.getId().equals(sinistre.getContratId()))
+                )
+                .collect(Collectors.toList());
+        return sinistres.stream()
+                .mapToDouble(Sinistre::getCout)
+                .sum();
+    }
 
 }

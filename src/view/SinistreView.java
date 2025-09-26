@@ -157,4 +157,14 @@ public class SinistreView {
         }
     }
 
+    public void getTotalCoutByClientId() {
+        System.out.print("Enter client ID: ");
+        Integer id = scanner.nextInt();
+        scanner.nextLine();
+
+        double totalCout = sinistreService.getTotalCoutByClientId(id);
+        System.out.println("Total cost of all sinistres for this client is: " + totalCout);
+    }
+
+
 }

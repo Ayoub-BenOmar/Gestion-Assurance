@@ -1,9 +1,11 @@
 package view;
 
 import enums.TypeContrat;
+import model.Contrat;
 import service.ContratService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -64,7 +66,8 @@ public class ContratView {
         scanner.nextLine();
 
         try{
-            contratService.getContractsByClientId(id);
+            List<Contrat> contrats = contratService.getContractsByClientId(id);
+            contrats.forEach(contrat -> System.out.println("ID: " + contrat.getId() + ", Type of contrat: " + contrat.getTypeContrat() + ", Start: " + contrat.getDateDebut() + ", End: " + contrat.getDateFin()));
         } catch (Exception e) {
             System.out.println("Error: " +e.getMessage());
         }
