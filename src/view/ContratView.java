@@ -69,4 +69,6 @@ public class ContratView {
             System.out.println("Error: " +e.getMessage());
         }
     }
+
+
 }

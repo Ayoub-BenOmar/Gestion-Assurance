@@ -12,15 +12,31 @@ public class Sinistre {
     private Date dateTime;
     private double cout;
     private String description;
-    private List<String> contrats;
+    private Integer contratId;
 
-    public Sinistre(String id, TypeSinistre typeSinistre, Date dateTime, double cout, String description, List<String> contrats) {
+    public Sinistre(TypeSinistre typeSinistre, Date dateTime, double cout, String description, Integer contratId) {
+        this.typeSinistre = typeSinistre;
+        this.dateTime = dateTime;
+        this.cout = cout;
+        this.description = description;
+        this.contratId = contratId;
+    }
+
+    public Sinistre(String id, TypeSinistre typeSinistre, Date dateTime, double cout, String description, Integer contratId) {
         this.id = id;
         this.typeSinistre = typeSinistre;
         this.dateTime = dateTime;
         this.cout = cout;
         this.description = description;
-        this.contrats = new ArrayList<>();
+        this.contratId = contratId;
+    }
+
+    public Integer getContratId() {
+        return contratId;
+    }
+
+    public void setContratId(Integer contratId) {
+        this.contratId = contratId;
     }
 
     public String getId() {
@@ -61,13 +77,5 @@ public class Sinistre {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<String> getContrats() {
-        return contrats;
-    }
-
-    public void setContrats(List<String> contrats) {
-        this.contrats = contrats;
     }
 }
