@@ -1,18 +1,29 @@
 package model;
 
 import enums.TypeContrat;
-import java.util.Date;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Contrat {
     private TypeContrat typeContrat;
-    private Date dateDebut;
-    private Date dateFin;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
+    private Integer client_id;
 
-    public Contrat(TypeContrat typeContrat, Date dateDebut, Date dateFin) {
+    public Contrat(TypeContrat typeContrat, LocalDate dateDebut, LocalDate dateFin, Integer client_id) {
         this.typeContrat = typeContrat;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.client_id = client_id;
+    }
+
+    public Integer getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(Integer client_id) {
+        this.client_id = client_id;
     }
 
     public TypeContrat getTypeContrat() {
@@ -23,19 +34,29 @@ public class Contrat {
         this.typeContrat = typeContrat;
     }
 
-    public Date getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Date dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public Date getDateFin() {
+    public LocalDate getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Date dateFin) {
+    public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
+    }
+
+    @Override
+    public String toString() {
+        return "Contrat{" +
+                ", typeContrat=" + typeContrat +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", clientId=" + client_id +
+                '}';
     }
 }
